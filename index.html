@@ -10,7 +10,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -18,33 +17,28 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-
         .header {
             text-align: center;
             margin-bottom: 40px;
             color: white;
             padding: 40px 0;
         }
-
         .header h1 {
             font-size: 3rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             animation: fadeInDown 1s ease-out;
         }
-
         .header p {
             font-size: 1.3rem;
             opacity: 0.9;
             animation: fadeInUp 1s ease-out 0.3s both;
         }
-
         .cta-button {
             display: inline-block;
             background: linear-gradient(45deg, #ff6b6b, #ee5a24);
@@ -59,12 +53,10 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             animation: pulse 2s infinite;
         }
-
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
-
         .guide-container {
             background: white;
             border-radius: 20px;
@@ -72,7 +64,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-bottom: 30px;
         }
-
         .step {
             margin-bottom: 50px;
             padding: 30px;
@@ -83,17 +74,14 @@
             opacity: 0;
             transform: translateY(20px);
         }
-
         .step.visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         .step:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-
         .step-number {
             display: inline-block;
             background: linear-gradient(45deg, #667eea, #764ba2);
@@ -107,58 +95,83 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
-
         .step h3 {
             color: #333;
             font-size: 1.5rem;
             margin-bottom: 15px;
         }
-
         .step p {
             color: #666;
             font-size: 1.1rem;
             margin-bottom: 20px;
         }
-
-        .screenshot-placeholder {
-            background: linear-gradient(45deg, #e0e0e0, #f0f0f0);
-            border: 2px dashed #ccc;
-            border-radius: 10px;
-            padding: 40px;
+        .screenshot-container {
+            margin: 25px 0;
             text-align: center;
-            color: #888;
-            font-style: italic;
-            margin: 20px 0;
-            transition: all 0.3s ease;
         }
-
+        .screenshot-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            border: none;
+            background: transparent;
+        }
+        .screenshot-container img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+        .screenshot-placeholder {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px dashed #dee2e6;
+            border-radius: 12px;
+            padding: 60px 40px;
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            margin: 25px 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .screenshot-placeholder::before {
+            content: '🖼️';
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 15px;
+            opacity: 0.7;
+        }
         .screenshot-placeholder:hover {
             border-color: #667eea;
-            background: linear-gradient(45deg, #f0f0ff, #f8f8ff);
+            background: linear-gradient(135deg, #f0f0ff 0%, #f8f8ff 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
         }
-
         .tip {
-            background: linear-gradient(45deg, #ffeaa7, #fdcb6e);
-            border-radius: 10px;
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            border-radius: 12px;
             padding: 20px;
-            margin: 20px 0;
-            border-left: 4px solid #e17055;
+            margin: 25px 0;
+            border-left: 4px solid #ffc107;
+            box-shadow: 0 2px 10px rgba(255, 193, 7, 0.1);
+            transition: all 0.3s ease;
         }
-
+        .tip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.15);
+        }
         .tip::before {
             content: "💡 ";
             font-size: 1.2rem;
         }
-
         .tip strong {
-            color: #d63031;
+            color: #856404;
         }
-
         .final-button {
             text-align: center;
             margin-top: 50px;
         }
-
         .final-button a {
             display: inline-block;
             background: linear-gradient(45deg, #00b894, #00cec9);
@@ -171,12 +184,10 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-
         .final-button a:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
-
         .progress-bar {
             position: fixed;
             top: 0;
@@ -187,7 +198,6 @@
             transition: width 0.3s ease;
             z-index: 1000;
         }
-
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -198,7 +208,6 @@
                 transform: translateY(0);
             }
         }
-
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -209,7 +218,6 @@
                 transform: translateY(0);
             }
         }
-
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -221,7 +229,6 @@
                 transform: scale(1);
             }
         }
-
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -233,6 +240,10 @@
             
             .step {
                 padding: 20px;
+            }
+            
+            .screenshot-placeholder {
+                padding: 40px 20px;
             }
         }
     </style>
@@ -246,17 +257,15 @@
             <p>Créez et partagez votre carte personnalisée en 9 étapes simples</p>
             <a href="https://studio.foursquare.com/map/" class="cta-button" target="_blank">Créer ma carte personnalisée</a>
         </div>
-
         <div class="guide-container">
             <div class="step" id="step1">
                 <div class="step-number">1</div>
                 <h3>Création de votre compte Foursquare Studio</h3>
                 <p>Après avoir cliqué sur le bouton "Créer ma carte personnalisée", vous pouvez créer un compte en quelques secondes sur Foursquare Studio à l'aide d'un compte Google déjà existant. Cette étape est rapide et sécurisée grâce à l'authentification Google. Une fois votre compte créé, vous arriverez automatiquement sur la page principale de Foursquare Studio où vous pourrez commencer à créer votre carte.</p>
-                <div class="screenshot-placeholder">
-                    <img src="foursquare-studio-homepage.png" alt="Page d'accueil de Foursquare Studio" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+                <div class="screenshot-container">
+                    <img src="foursquare-studio-homepage.png" alt="Page d'accueil de Foursquare Studio">
                 </div>
             </div>
-
             <div class="step" id="step2">
                 <div class="step-number">2</div>
                 <h3>Import de vos fichiers GeoJSON</h3>
@@ -264,50 +273,45 @@
                 <div class="tip">
                     <strong>Info :</strong> Vous avez pu télécharger ces données lors du calcul des itinéraires vélos, en appuyant sur les deux boutons suivants : <strong>🗺️ TÉLÉCHARGER GEOJSON (LIGNES)</strong> et <strong>📍 TÉLÉCHARGER GEOJSON (TOUS LES POINTS)</strong>.
                 </div>
-                <div class="screenshot-placeholder">
-                    <img src="import-geojson-files.png" alt="Interface d'import des fichiers GeoJSON" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+                <div class="screenshot-container">
+                    <img src="import-geojson-files.png" alt="Interface d'import des fichiers GeoJSON">
                 </div>
             </div>
-
             <div class="step" id="step3">
                 <div class="step-number">3</div>
                 <h3>Gestion des couches de données</h3>
                 <p>Une fois vos fichiers importés, vous verrez apparaître de nouvelles couches dans le panneau de gauche. Vous pouvez masquer temporairement ces couches en cliquant sur les icônes en forme d'œil situées à côté de chaque nom de couche. Si vous souhaitez supprimer définitivement une couche, cliquez sur les trois petits points à droite du nom de la couche et sélectionnez "Supprimer".</p>
-                <div class="screenshot-placeholder">
-                    <img src="layer-management.png" alt="Panneau de gestion des couches" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+                <div class="screenshot-container">
+                    <img src="layer-management.png" alt="Panneau de gestion des couches">
                 </div>
             </div>
-
             <div class="step" id="step4">
                 <div class="step-number">4</div>
                 <h3>Création de la Heat Map</h3>
                 <p>Pour créer votre carte de chaleur (heat map), cliquez sur le bouton "Add Layer" dans le panneau de gauche. Une fenêtre s'ouvrira vous permettant de sélectionner la source de données pour créer votre carte. Dans ce cas précis, sélectionnez "point_détaillé_itinéraires_vélo" comme source de données principale.</p>
-                <div class="screenshot-placeholder">
-                    <img src="select-data-source.png" alt="Sélection de la source de données" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+                <div class="screenshot-container">
+                    <img src="select-data-source.png" alt="Sélection de la source de données">
                 </div>
             </div>
-
             <div class="step" id="step5">
                 <div class="step-number">5</div>
                 <h3>Sélection du type de visualisation</h3>
                 <p>Dans la liste des types de cartes disponibles, sélectionnez "Heatmap" pour créer une carte de chaleur. Ce type de visualisation est parfait pour représenter la densité de points sur une zone géographique, en utilisant des couleurs chaudes pour les zones à forte concentration et des couleurs froides pour les zones moins denses.</p>
-                <div class="screenshot-placeholder">
-                    <img src="select-heatmap-type.png" alt="Sélection du type Heatmap" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+                <div class="screenshot-container">
+                    <img src="select-heatmap-type.png" alt="Sélection du type Heatmap">
                 </div>
-                <div class="screenshot-placeholder">
-                    <img src="heatmap-preview.png" alt="Aperçu de la heat map générée" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+                <div class="screenshot-container">
+                    <img src="heatmap-preview.png" alt="Aperçu de la heat map générée">
                 </div>
             </div>
-
             <div class="step" id="step6">
                 <div class="step-number">6</div>
                 <h3>Configuration des coordonnées</h3>
                 <p>Dans les paramètres de la heat map, vous devez maintenant remplir les champs de géolocalisation. Associez le champ "Lat" (latitude) avec votre colonne contenant les données de latitude, et le champ "Lng" (longitude) avec votre colonne contenant les données de longitude. Cette étape est cruciale pour que votre carte s'affiche correctement sur la zone géographique souhaitée.</p>
-                <div class="screenshot-placeholder">
-                    <img src="configure-coordinates.png" alt="Configuration des champs Lat et Lng" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+                <div class="screenshot-container">
+                    <img src="configure-coordinates.png" alt="Configuration des champs Lat et Lng">
                 </div>
             </div>
-
             <div class="step" id="step7">
                 <div class="step-number">7</div>
                 <h3>Optimisation des paramètres visuels</h3>
@@ -315,32 +319,29 @@
                 <div class="tip">
                     <strong>Conseil :</strong> N'hésitez pas à expérimenter avec ces valeurs pour obtenir le rendu qui correspond le mieux à vos données.
                 </div>
-                <div class="screenshot-placeholder">
-                    <img src="visual-parameters.png" alt="Panneau d'ajustement des paramètres visuels" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+                <div class="screenshot-container">
+                    <img src="visual-parameters.png" alt="Panneau d'ajustement des paramètres visuels">
                 </div>
             </div>
-
             <div class="step" id="step8">
                 <div class="step-number">8</div>
                 <h3>Préparation au partage</h3>
                 <p>Une fois votre carte finalisée, vous pouvez la préparer pour le partage. Cliquez sur le bouton "Share" puis sur "Publish" pour rendre votre carte accessible au public. Si vous souhaitez afficher uniquement la carte sans les options de légende, cliquez sur "Collapse" pour masquer automatiquement le panneau de légende. L'option "Hidden" supprimera complètement certains éléments d'interface pour un affichage plus épuré.</p>
-                <div class="screenshot-placeholder">
-                    <img src="share-options.png" alt="Options de partage" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+                <div class="screenshot-container">
+                    <img src="share-options.png" alt="Options de partage">
                 </div>
-                <div class="screenshot-placeholder">
-                    <img src="publish-settings.png" alt="Paramètres de publication" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+                <div class="screenshot-container">
+                    <img src="publish-settings.png" alt="Paramètres de publication">
                 </div>
             </div>
-
             <div class="step" id="step9">
                 <div class="step-number">9</div>
                 <h3>Récupération du lien d'intégration</h3>
                 <p>La dernière étape consiste à publier définitivement votre carte. Cliquez sur le bouton "Publish" pour finaliser la publication. Ensuite, rendez-vous dans l'onglet "Embed" pour récupérer le lien de votre carte. Ce lien vous permettra d'intégrer votre carte dans l'analyseur ou de la partager avec d'autres utilisateurs. Copiez ce lien et utilisez-le dans l'application d'analyse pour visualiser et analyser vos données cartographiques.</p>
-                <div class="screenshot-placeholder">
-                    <img src="embed-link.png" alt="Récupération du lien d'intégration" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+                <div class="screenshot-container">
+                    <img src="embed-link.png" alt="Récupération du lien d'intégration">
                 </div>
             </div>
-
             <div class="final-button">
                 <a href="https://mariusbrion.github.io/analyseur/" target="_blank">
                     🚀 Accéder à l'analyseur
@@ -348,7 +349,6 @@
             </div>
         </div>
     </div>
-
     <script>
         // Animation d'apparition des étapes au scroll
         function observeSteps() {
@@ -363,12 +363,10 @@
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             });
-
             steps.forEach(step => {
                 observer.observe(step);
             });
         }
-
         // Barre de progression
         function updateProgressBar() {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -376,14 +374,12 @@
             const scrolled = (winScroll / height) * 100;
             document.getElementById('progressBar').style.width = scrolled + '%';
         }
-
         // Fonction pour démarrer le guide
         function startGuide() {
             document.querySelector('.guide-container').scrollIntoView({
                 behavior: 'smooth'
             });
         }
-
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
             observeSteps();
