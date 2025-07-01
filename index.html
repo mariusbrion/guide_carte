@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Foursquare Studio - Créer une Carte Personnalisée</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .guide-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .step {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .screenshot-placeholder {
+            background: linear-gradient(45deg, #e0e0e0, #f0f0f0);
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .screenshot-placeholder:hover {
+            border-color: #667eea;
+            background: linear-gradient(45deg, #f0f0ff, #f8f8ff);
+        }
+
+        .tip {
+            background: linear-gradient(45deg, #ffeaa7, #fdcb6e);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #e17055;
+        }
+
+        .tip::before {
+            content: "💡 ";
+            font-size: 1.2rem;
+        }
+
+        .tip strong {
+            color: #d63031;
+        }
+
+        .final-button {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .final-button a {
+            display: inline-block;
+            background: linear-gradient(45deg, #00b894, #00cec9);
+            color: white;
+            padding: 20px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .final-button a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            z-index: 1000;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .guide-container {
+                padding: 20px;
+            }
+            
+            .step {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Guide Foursquare Studio</h1>
+            <p>Créez et partagez votre carte personnalisée en 9 étapes simples</p>
+            <a href="#" class="cta-button" onclick="startGuide()">Créer ma carte personnalisée</a>
+        </div>
+
+        <div class="guide-container">
+            <div class="step" id="step1">
+                <div class="step-number">1</div>
+                <h3>Création de votre compte Foursquare Studio</h3>
+                <p>Après avoir cliqué sur le bouton "Créer ma carte personnalisée", vous pouvez créer un compte en quelques secondes sur Foursquare Studio à l'aide d'un compte Google déjà existant. Cette étape est rapide et sécurisée grâce à l'authentification Google. Une fois votre compte créé, vous arriverez automatiquement sur la page principale de Foursquare Studio où vous pourrez commencer à créer votre carte.</p>
+                <div class="screenshot-placeholder">
+                    Capture d'écran : Page d'accueil de Foursquare Studio
+                    <br><small>(Insérer l'image : foursquare-studio-homepage.png)</small>
+                </div>
+            </div>
+
+            <div class="step" id="step2">
+                <div class="step-number">2</div>
+                <h3>Import de vos fichiers GeoJSON</h3>
+                <p>Faites glisser vos deux fichiers au format GeoJSON intitulés "itinéraires_vélo" et "point_détaillé_vélo" directement dans la zone de téléchargement de Foursquare Studio. Vous pouvez également utiliser le bouton "Parcourir" pour sélectionner vos fichiers. Une fois les fichiers sélectionnés, cliquez sur le bouton "Add Data" pour les importer dans votre projet.</p>
+                <div class="tip">
+                    <strong>Astuce :</strong> Assurez-vous que vos fichiers GeoJSON sont correctement formatés et contiennent les données de géolocalisation nécessaires.
+                </div>
+                <div class="screenshot-placeholder">
+                    Capture d'écran : Interface d'import des fichiers GeoJSON
+                    <br><small>(Insérer l'image : import-geojson-files.png)</small>
+                </div>
+            </div>
+
+            <div class="step" id="step3">
+                <div class="step-number">3</div>
+                <h3>Gestion des couches de données</h3>
+                <p>Une fois vos fichiers importés, vous verrez apparaître de nouvelles couches dans le panneau de gauche. Vous pouvez masquer temporairement ces couches en cliquant sur les icônes en forme d'œil situées à côté de chaque nom de couche. Si vous souhaitez supprimer définitivement une couche, cliquez sur les trois petits points à droite du nom de la couche et sélectionnez "Supprimer".</p>
+                <div class="screenshot-placeholder">
+                    Capture d'écran : Panneau de gestion des couches
+                    <br><small>(Insérer l'image : layer-management.png)</small>
+                </div>
+            </div>
+
+            <div class="step" id="step4">
+                <div class="step-number">4</div>
+                <h3>Création de la Heat Map</h3>
+                <p>Pour créer votre carte de chaleur (heat map), cliquez sur le bouton "Add Layer" dans le panneau de gauche. Une fenêtre s'ouvrira vous permettant de sélectionner la source de données pour créer votre carte. Dans ce cas précis, sélectionnez "point_détaillé_itinéraires_vélo" comme source de données principale.</p>
+                <div class="screenshot-placeholder">
+                    Capture d'écran : Sélection de la source de données
+                    <br><small>(Insérer l'image : select-data-source.png)</small>
+                </div>
+            </div>
+
+            <div class="step" id="step5">
+                <div class="step-number">5</div>
+                <h3>Sélection du type de visualisation</h3>
+                <p>Dans la liste des types de cartes disponibles, sélectionnez "Heatmap" pour créer une carte de chaleur. Ce type de visualisation est parfait pour représenter la densité de points sur une zone géographique, en utilisant des couleurs chaudes pour les zones à forte concentration et des couleurs froides pour les zones moins denses.</p>
+                <div class="screenshot-placeholder">
+                    Capture d'écran : Sélection du type "Heatmap"
+                    <br><small>(Insérer l'image : select-heatmap-type.png)</small>
+                </div>
+                <div class="screenshot-placeholder">
+                    Capture d'écran : Aperçu de la heat map générée
+                    <br><small>(Insérer l'image : heatmap-preview.png)</small>
+                </div>
+            </div>
+
+            <div class="step" id="step6">
+                <div class="step-number">6</div>
+                <h3>Configuration des coordonnées</h3>
+                <p>Dans les paramètres de la heat map, vous devez maintenant remplir les champs de géolocalisation. Associez le champ "Lat" (latitude) avec votre colonne contenant les données de latitude, et le champ "Lng" (longitude) avec votre colonne contenant les données de longitude. Cette étape est cruciale pour que votre carte s'affiche correctement sur la zone géographique souhaitée.</p>
+                <div class="screenshot-placeholder">
+                    Capture d'écran : Configuration des champs Lat et Lng
+                    <br><small>(Insérer l'image : configure-coordinates.png)</small>
+                </div>
+            </div>
+
+            <div class="step" id="step7">
+                <div class="step-number">7</div>
+                <h3>Optimisation des paramètres visuels</h3>
+                <p>Pour améliorer la lisibilité de votre carte, vous pouvez ajuster plusieurs paramètres. En général, une valeur d'"Intensity" (intensité) autour de 0.27 et une valeur de "Threshold" (seuil) autour de 0.1 donnent des résultats plus lisibles et esthétiques. Le paramètre "Radius" (rayon) dépend quant à lui du nombre de points de données dans votre fichier : plus vous avez de données, plus vous pouvez utiliser un rayon réduit.</p>
+                <div class="tip">
+                    <strong>Conseil :</strong> N'hésitez pas à expérimenter avec ces valeurs pour obtenir le rendu qui correspond le mieux à vos données.
+                </div>
+                <div class="screenshot-placeholder">
+                    Capture d'écran : Panneau d'ajustement des paramètres visuels
+                    <br><small>(Insérer l'image : visual-parameters.png)</small>
+                </div>
+            </div>
+
+            <div class="step" id="step8">
+                <div class="step-number">8</div>
+                <h3>Préparation au partage</h3>
+                <p>Une fois votre carte finalisée, vous pouvez la préparer pour le partage. Cliquez sur le bouton "Share" puis sur "Publish" pour rendre votre carte accessible au public. Si vous souhaitez afficher uniquement la carte sans les options de légende, cliquez sur "Collapse" pour masquer automatiquement le panneau de légende. L'option "Hidden" supprimera complètement certains éléments d'interface pour un affichage plus épuré.</p>
+                <div class="screenshot-placeholder">
+                    Capture d'écran : Options de partage
+                    <br><small>(Insérer l'image : share-options.png)</small>
+                </div>
+                <div class="screenshot-placeholder">
+                    Capture d'écran : Paramètres de publication
+                    <br><small>(Insérer l'image : publish-settings.png)</small>
+                </div>
+            </div>
+
+            <div class="step" id="step9">
+                <div class="step-number">9</div>
+                <h3>Récupération du lien d'intégration</h3>
+                <p>La dernière étape consiste à publier définitivement votre carte. Cliquez sur le bouton "Publish" pour finaliser la publication. Ensuite, rendez-vous dans l'onglet "Embed" pour récupérer le lien de votre carte. Ce lien vous permettra d'intégrer votre carte dans l'analyseur ou de la partager avec d'autres utilisateurs. Copiez ce lien et utilisez-le dans l'application d'analyse pour visualiser et analyser vos données cartographiques.</p>
+                <div class="screenshot-placeholder">
+                    Capture d'écran : Récupération du lien d'intégration
+                    <br><small>(Insérer l'image : embed-link.png)</small>
+                </div>
+            </div>
+
+            <div class="final-button">
+                <a href="https://mariusbrion.github.io/analyseur/" target="_blank">
+                    🚀 Accéder à l'analyseur
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Animation d'apparition des étapes au scroll
+        function observeSteps() {
+            const steps = document.querySelectorAll('.step');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            steps.forEach(step => {
+                observer.observe(step);
+            });
+        }
+
+        // Barre de progression
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        }
+
+        // Fonction pour démarrer le guide
+        function startGuide() {
+            document.querySelector('.guide-container').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            observeSteps();
+            window.addEventListener('scroll', updateProgressBar);
+        });
+    </script>
+</body>
+</html>
