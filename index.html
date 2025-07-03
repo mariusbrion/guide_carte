@@ -198,6 +198,38 @@
             transition: width 0.3s ease;
             z-index: 1000;
         }
+        .signature {
+            text-align: center;
+            margin: 40px 0 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease 0.3s;
+        }
+        .signature a {
+            display: inline-block;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: rgba(0,0,0,0.1);
+            backdrop-filter: blur(3px);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .signature a:hover {
+            background: rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+        .signature span:first-child {
+            font-weight: 500;
+        }
+        .signature span:last-child {
+            font-weight: 600;
+            color: #fff;
+            margin-left: 4px;
+        }
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -244,6 +276,11 @@
             
             .screenshot-placeholder {
                 padding: 40px 20px;
+            }
+            
+            .signature a {
+                padding: 6px 15px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -351,6 +388,14 @@
                 </a>
             </div>
         </div>
+        
+        <!-- Signature ajoutée ici -->
+        <div class="signature">
+            <a href="https://mariusbrion.github.io/portfolio/" target="_blank">
+                <span>Design & développement</span> 
+                <span>Marius Brion</span>
+            </a>
+        </div>
     </div>
     <script>
         // Animation d'apparition des étapes au scroll
@@ -387,6 +432,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             observeSteps();
             window.addEventListener('scroll', updateProgressBar);
+            
+            // Animation de la signature
+            setTimeout(() => {
+                const signature = document.querySelector('.signature');
+                signature.style.opacity = '1';
+                signature.style.transform = 'translateY(0)';
+            }, 1200);
         });
     </script>
 </body>
